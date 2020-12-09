@@ -9,5 +9,17 @@ const argv = require("yargs").options({
     }
 }).argv;
 
-weather.getWeather(argv.city).then((resp) => console.log(resp));
-weather.getWeatherByLatLon(40.75, -74).then(console.log).catch(console.log);
+const getInfo = async (city) => {
+    try {
+        const data = await weather.getWeather(city);
+        const weat = await weather.getWeatherByLatLon(data.lat, data.lng);
+
+        return `The temperature in ${city} now is ${weat}`;
+    } catch (error) {
+        return `Unable to determine the weather for ${city} `;
+    }
+};
+
+getInfo(argv.city)
+    .then((resp) => console.log(resp))
+    .catch((resp) => console.log(resp));

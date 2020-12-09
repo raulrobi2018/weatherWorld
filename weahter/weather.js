@@ -7,7 +7,7 @@ const getWeather = async (city) => {
     const encodedUrl = encodeURI(city);
 
     const instance = axios.create({
-        baseURL: `https://api.openweathermap.org/data/2.5/weather?q=${encodedUrl}&appid=${API_KEY}&units=${unit}`
+        baseURL: `https://api.openweathermap.org/data/2.5/weather?q=${encodedUrl}&appid=${API_KEY}&units=${UNIT}`
     });
 
     //Retorna una promise
@@ -33,7 +33,9 @@ const getWeather = async (city) => {
 };
 
 const getWeatherByLatLon = async (lat, lon) => {
-    const resp = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${}`);
+    const resp = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${UNIT}`
+    );
 
     return resp.data.main.temp;
 };
