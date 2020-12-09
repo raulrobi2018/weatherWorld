@@ -1,9 +1,10 @@
 const axios = require("axios");
 
-const getCityLatLng = async (city) => {
+const API_KEY = "67985f7525ef760712d9f5033933f10e";
+const UNIT = "metric";
+
+const getWeather = async (city) => {
     const encodedUrl = encodeURI(city);
-    const API_KEY = "67985f7525ef760712d9f5033933f10e";
-    const unit = "metric";
 
     const instance = axios.create({
         baseURL: `https://api.openweathermap.org/data/2.5/weather?q=${encodedUrl}&appid=${API_KEY}&units=${unit}`
@@ -31,6 +32,13 @@ const getCityLatLng = async (city) => {
     };
 };
 
+const getWeatherByLatLon = async (lat, lon) => {
+    const resp = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${}`);
+
+    return resp.data.main.temp;
+};
+
 module.exports = {
-    getCityLatLng
+    getWeather,
+    getWeatherByLatLon
 };

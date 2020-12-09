@@ -1,5 +1,5 @@
 const axios = require("axios");
-const place = require("./places/place");
+const weather = require("./weahter/weather");
 
 const argv = require("yargs").options({
     city: {
@@ -9,4 +9,5 @@ const argv = require("yargs").options({
     }
 }).argv;
 
-place.getCityLatLng(argv.city).then((resp) => console.log(resp));
+weather.getWeather(argv.city).then((resp) => console.log(resp));
+weather.getWeatherByLatLon(40.75, -74).then(console.log).catch(console.log);
